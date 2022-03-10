@@ -3,7 +3,6 @@ const AWS = require('aws-sdk');
 const express = require('express');
 const app = express();
 const multer = require('multer');
-
 const multerUploadPlaceholder = multer({
 
     limits: {
@@ -28,14 +27,12 @@ app.post(
             };
        
             const result = await (new AWS.Lambda().invoke(params).promise());
-            console.log("result", result)
-            res.status(result.statusCode).send(result.body);
+            if(result.StatusCode) res.status(result.StatusCode).send({"result": JSON.parse(result.Payload)});
+            else res.status(result.StatusCode).send(result);   
         } catch(error){
             console.log(error)
             res.status(500).send(`Error Uploading image ${error}`);
-        }
-      
-        
+        }    
     },
     function(err, req, res, next) {
         if(err){
