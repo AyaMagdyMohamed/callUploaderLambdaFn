@@ -6,7 +6,7 @@ Follow these steps to run the sever  locally:
 
   ACCESS_KEY_ID='some value'
 
- SECRET_ACCESS_KEY='value'
+  SECRET_ACCESS_KEY='value'
 
 - and run node index.js 
 
